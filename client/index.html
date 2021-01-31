@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles/index.css">
+    <title>Аэропорт</title>
+</head>
+<body>
+<!-- Главная страница -->
+<div id="main-page" class="page">
+    <div class="container">
+        <div class="title-field">
+            <h1 class="title">Добро пожаловать!</h1>
+        </div>
+        <h2 class="main-subtitle">Для дальнейшей работы выберете роль</h2>
+        <div class="content-main no-boarder">
+            <span class="button but black-button" onclick=openPage(mainPage,adminPage)><a class="to-admin-page">Диспетчер</a></span>
+            <span class="button but black-button" onclick=openPage(mainPage,pilotAuthPage)><a class="to-pilot-auth-page">Пилот</a></span>
+        </div>
+    </div>
+</div>
+<!-- Страница авторизации пилота -->
+<div id="pilot-auth-page" class="page">
+    <div class="container">
+        <div class="title-field">
+            <h1 class="title">Авторизация</h1>
+        </div>
+        <div class="content no-boarder">
+
+            <label>
+                ID :<br>
+                <input type="text" id="id" size="6" class="input-pilot" placeholder="123456">
+            </label>
+            <label>
+                ФИО :<br>
+                <input type="text" id="name" size="40" class="input-pilot" placeholder="Лебедев Вячеслав Романович">
+            </label>
+            <label>
+                Дата рождения :<br>
+                <input type="text" id="date" size="10" class="input-pilot" placeholder="07.03.2000">
+            </label>
+            <span class="button but orange-button" onclick=auth()><a class="to-pilot-page">Войти</a></span>
+
+        </div>
+        <div class="buttons all-btns">
+            <span class="button but black-button" onclick=openPage(pilotAuthPage,mainPage)><a class="to-main-page">Назад</a></span>
+        </div>
+    </div>
+</div>
+<!-- Страница пилота -->
+<div id="pilot-page" class="page">
+    <div class="container">
+        <div class="title-field">
+            <h1 class="title">Меню пилота</h1>
+        </div>
+        <div class="content-pil no-boarder">
+            <div class="button but orange-button" onclick=openPage(pilotPage,pilotRequestPage)><a class="to-pilot-request-page">Подать заявку</a></div>
+            <div class="button but orange-button" onclick=openPage(pilotPage,pilotCurPage)><a class="to-pilot-cur-page">Мои рейсы</a></div>
+        </div>
+        <div class="buttons">
+            <span class="button but black-button" onclick=openPage(pilotPage,pilotAuthPage)><a class="to-pilot-auth-page">Назад</a></span>
+        </div>
+    </div>
+</div>
+<!-- Страница подачи заявок пилота -->
+<div id="pilot-request-page" class="page">
+    <div class="container">
+        <div class="title-field">
+            <h1 class="title">Актуальные планы полетов</h1>
+        </div>
+        <div class="content" id="content-plans">
+
+        </div>
+
+        <div class="buttons">
+            <div class="buttons-cur">
+                <span class="button but black-button" onclick=openPage(pilotRequestPage,pilotPage)><a class="to-pilot-page">Назад</a></span>
+                <span class="button but orange-button" onclick=getCheckboxes()><a>Подать заявку</a></span>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Страница рейсов пилота -->
+<div id="pilot-cur-page" class="page">
+    <div class="container">
+        <div class="title-field">
+            <h1 class="title">Мои рейсы</h1>
+        </div>
+        <div class="content" id="content-reis">
+            <div>
+
+            </div>
+        </div>
+        <div class="buttons">
+            <span class="button but black-button" onclick=openPage(pilotCurPage,pilotPage)><a class="to-pilot-page">Назад</a></span>
+        </div>
+    </div>
+</div>
+<!-- Страница администратора -->
+<div id="admin-page" class="page">
+    <div class="container">
+        <div class="title-field">
+            <h1 class="title">Меню диспетчера</h1>
+        </div>
+        <div class="content-admin no-boarder">
+            <div class="button but orange-button" onclick=openPage(adminPage,pilotInfoPage)><a class="to-pilot-info-page">Пилоты</a></div>
+            <div class="button but orange-button" onclick=openPage(adminPage,addPlanPage)><a class="to-add-plan-page">Планы полетов</a></div>
+            <div class="button but orange-button" onclick=openPage(adminPage,nonCompleteReisPage)><a class="to-non-complete-reis-page">Неукомплектованные рейсы</a></div>
+        </div>
+        <div class="buttons">
+            <span class="button but black-button" onclick=openPage(adminPage,mainPage)><a class="to-main-page">Назад</a></span>
+        </div>
+    </div>
+</div>
+<!-- Страница пилотов -->
+<div id="pilot-info-page" class="page">
+    <div class="container">
+        <div class="title-field">
+            <h1 class="title">Все пилоты</h1>
+        </div>
+        <div class="content" id="admin-content-pilot">
+
+        </div>
+        <div class="buttons">
+            <span class="button but black-button" onclick=openPage(pilotInfoPage,adminPage)><a class="to-admin-page">Назад</a></span>
+        </div>
+    </div>
+</div>
+<!-- Страница добавления планов -->
+<div id="add-plan-page" class="page">
+    <div class="container">
+        <div class="title-field">
+            <h1 class="title">Добавить план полета</h1>
+        </div>
+        <div class="content no-boarder" id="content-add-plan">
+            <div id="admin-content-plans">
+
+            </div>
+            <div class="form">
+                <input type="text" size="4" id="number" class="input-admin" placeholder="0001">
+                <input type="text" size="3" id="destination" class="input-admin" placeholder="SVO">
+                <input type="text" size="3" id="arrival" class="input-admin" placeholder="VVO">
+                <input type="text" size="10" id="date-reis" class="input-admin" placeholder="03.02.2021">
+                <input type="text" size="5" id="time-dest" class="input-admin" placeholder="10:30">
+                <input type="text" size="5" id="time-arr" class="input-admin" placeholder="18:30">
+            </div>
+        </div>
+        <div class="buttons-add">
+            <span class="button but black-button" onclick=openPage(addPlanPage,adminPage)><a class="to-admin-page">Назад</a></span>
+            <span class="button but orange-button" onclick=createPlanBtn()><a>Добавить</a></span>
+        </div>
+    </div>
+</div>
+<!-- Страница неукомликтованных рейсов -->
+<div id="non-complete-reis-page" class="page">
+    <div class="container">
+        <div class="title-field">
+            <h1 class="title">Неукомплектованные рейсы</h1>
+        </div>
+        <div class="content">
+            <div id="admin-content-reis">
+
+            </div>
+        </div>
+        <div class="buttons">
+            <span class="button but black-button" onclick=openPage(nonCompleteReisPage,adminPage)><a class="to-admin-page">Назад</a></span>
+        </div>
+    </div>
+</div>
+<script src="frontend.js"></script>
+</body>
+</html>
